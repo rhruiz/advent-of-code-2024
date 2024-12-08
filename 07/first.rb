@@ -11,7 +11,6 @@ end
 equations.each do |(result, terms)|
   queue = []
   queue << [result, terms.dup, []]
-  queue << [result, terms.dup, []]
 
   loop do
     break if queue.empty?
