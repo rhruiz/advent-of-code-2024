@@ -16,7 +16,7 @@ equations.each do |(result, terms)|
   loop do
     break if queue.empty?
 
-    (current_result, terms, operators) = queue.pop
+    (current_result, terms) = queue.pop
 
     if terms.length == 1
       if terms == [current_result]
@@ -29,16 +29,12 @@ equations.each do |(result, terms)|
     term = terms.pop
 
     if current_result % term != 0
-      operators << :+
-      current_result -= term
-
-      queue << [current_result, terms.dup, operators.dup]
+      queue << [current_result - term, terms.dup]
     else
-      queue << [current_result / term, terms.dup, operators.dup << :*]
-      queue << [current_result - term, terms.dup, operators.dup << :+]
+      queue << [current_result / term, terms.dup]
+      queue << [current_result - term, terms.dup]
     end
   end
 end
-
 
 puts results.sum
