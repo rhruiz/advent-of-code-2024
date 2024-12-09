@@ -1,15 +1,5 @@
 class Node
   attr_accessor :size, :type, :next, :prev, :id
-
-  def prev=(node)
-    raise "boom" unless node.is_a?(Node) or node.nil?
-    @prev = node
-  end
-
-  def next=(node)
-    raise "boom" unless node.is_a?(Node) or node.nil?
-    @next = node
-  end
 end
 
 id = -1
