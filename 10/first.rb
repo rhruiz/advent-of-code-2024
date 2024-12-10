@@ -9,10 +9,12 @@ scores = {}
 $stdin.each_line.each_with_index do |line, y|
   ymax = [y, ymax].max
   line.strip.chars.each_with_index do |chr, x|
-    height = chr.to_i
     xmax = [x, xmax].max
-    grid[[x, y]] = height
-    candidates << [x, y] if height == 0
+    if chr != '.'
+      height = chr.to_i
+      grid[[x, y]] = height
+      candidates << [x, y] if height == 0
+    end
   end
 end
 
@@ -38,6 +40,7 @@ candidates.each do |candidate|
     current = queue.shift
 
     neighbors.call(current).each do |neighbor|
+      next if grid[neighbor].nil?
       next if visited.member?(neighbor)
       next if grid[neighbor] != grid[current] + 1
 
